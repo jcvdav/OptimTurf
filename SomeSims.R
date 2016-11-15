@@ -8,7 +8,7 @@ rev <- function(area, nsteps, pop0, r, K, mrate, closure.vec = NULL){
   t <- sim1$time.series$time
   c <- sim1$time.series$catches
   
-  rev = sum(((c*60)-1825)/((1+0.05)^t))
+  rev = sum(((c*20)-730)/((1+0.05)^t))
   
   return(rev)
 }
@@ -85,8 +85,8 @@ rev2 <- function(area, nsteps, pop0, r, K, mrate, fish){
 ###
 
 ## Optimum size
-K <- 72833.3
-r <- 0.77
+K <- 53216.2302
+r <- 1.0834
 
 area <- matrix(nrow =10, ncol = 10, 0.5)
 area[5,5] = 0 

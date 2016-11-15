@@ -1,5 +1,5 @@
 ---
-title: "Maximizing TURF profit through different strategies"
+title: "Maximizing TURF profit through different closure strategies"
 author: "Caio Faro & Juan Carlos Villase?or"
 date: "November 16, 2016"
 output: ioslides_presentation
@@ -30,7 +30,7 @@ The reasoning for the implementation of a TURF-reserve is that by having a no-ta
 
 - The TURF is divided into parcels of 1 by 1 km.
 - Each parcel of the concessioned area has a starting density of $$N_0 = \frac{K}{2}$$.
-- Movement wrapped at the edges of the TURF. (Ovando *et al.*, 2016)
+- Movement wrapped at the edges of the TURF (Ovando *et al.*, 2016).
 - Organisms are recruited once a year, with no age or size structure.
 - Fishing effort (__*u*__) outside the reserve is equal for every parcel.
 - Price and costs are constant through time.
@@ -40,8 +40,19 @@ The reasoning for the implementation of a TURF-reserve is that by having a no-ta
 
 - Data from Quintana Roo provided by Comunidad y Biodiversidad A.C. (COBI).
 - Data colected through transects inside the reserves.
-- Parameters (__*r*__ and __*K*__) were estimated __based on__.
-- __*m*__ and __*u*__ were randomly selected.
+- Parameters __*r*__ and __*K*__ were estimated __based on__.
+- Parameters __*m*__ and __*u*__ were randomly selected.
+
+
+## __Parameters__
+
+- Growth rate ($r$) = 
+- Carrying capacity ($K$) = 
+- Movement rate ($m$) = 
+- Catch rate ($u$) = 
+- Price ($p$) = US$ 20/lobster
+- Cost ($c$) = US$ 730/year
+- Discount rate ($d$) = 0.05
 
 
 ## __Equations__
@@ -52,22 +63,11 @@ $$U_{i,j,t} = u_{i,j,t}N_{i,j,t}$$
 
 $$E_{i,j,t} = m\left((1-u_{i,j,t})N_{i,j,t}\right)$$
 
-$$M_{i,j,t} = \left(\frac{m}{4}(1-u_{i,j,t})\right)(N_{i-1,j,t}+N_{i+1,j,t}+N_{i,j-1,t}+N_{i,j+1,t})$$
+$$M_{i,j,t} = \left(\frac{m}{4}(1-u_{i,j,t})\right)(N_{i-1,j,t} + N_{i+1,j,t} + N_{i,j-1,t} + N_{i,j+1,t})$$
 
 $$C_t = \sum_{i=1}^{n} \sum_{j=1}^{n} u_{i,j,t}N_{i,j,t} \sum_{i=1}^{n} \sum_{j=1}^{n} U_{i,j,t}$$
 
 $$R_t = C_tp-c$$
-
-
-## __Parameters__
-
-- $r$ = 
-- $K$ = 
-- $m$ = 
-- $u$ = 
-- $p$ = US$ 60
-- $c$ = US$ 1825
-- $d$ = 0.05
 
 
 ## Slide with R Output
