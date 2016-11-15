@@ -1,0 +1,84 @@
+---
+title: "Maximizing TURF profit through different strategies"
+author: "Caio Faro & Juan Carlos Villase?or"
+date: "November 16, 2016"
+output: ioslides_presentation
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## __Project Set Up__
+
+A fishing community in the Caribbean has been awarded with the concession of an area to fish lobster for 50 years, starting in 2017. This area, known as a TURF (Territorial Use Rights for Fishing) has 100 km^2^ , in a 10 by 10 km polygon. The community has exclusive access to this TURF, and are not allowed to fish elsewhere. 
+
+The fishers have heard from nearby communities about an option to enhance the productivity and the income by closing fishing grounds within the TURF (i.e. a TURF-reserve), and have seeked consultation to find the optimum way in which they can maximize profits.
+
+The reasoning for the implementation of a TURF-reserve is that by having a no-take area, the TURF will benefit from the spillover (i.e. organisms that step out of the reserve).
+
+
+## __Strategies__
+
+1) __Permanent closure__: Close a percentage of the TURF to get benefits from spillover. The reserve will remain closed forever, and we would have to find the optimum size of the reserve that maximizes profits.
+
+2) __Temporal closure__: Close a percentage of the TURF for some years, allowing the population to recover. Then, after t years open the reserve and allow fish within the reserve with the same effort as outside. After that, the reserve is closed for $T*$ years again.
+
+
+## __Assumptions__
+
+- The TURF is divided into parcels of 1 by 1 km.
+- Each parcel of the concessioned area has a starting density of $$N_0 = \frac{K}{2}$$.
+- Movement wrapped at the edges of the TURF. (Ovando *et al.*, 2016)
+- Organisms are recruited once a year, with no age or size structure.
+- Fishing effort (__*u*__) outside the reserve is equal for every parcel.
+- Price and costs are constant through time.
+
+
+## __Data__
+
+- Data from Quintana Roo provided by Comunidad y Biodiversidad A.C. (COBI).
+- Data colected through transects inside the reserves.
+- Parameters (__*r*__ and __*K*__) were estimated __based on__.
+- __*m*__ and __*u*__ were randomly selected.
+
+
+## __Equations__
+
+$$N_{i,j,t+1} = N_{i,j,t} + N_{i,j,t}r\left(1-\left(\frac{N_{i,j,t}}{K}\right)\right) - U_{i,j,t} + M_{i,j,t} - E_{i,j,t}$$
+
+$$U_{i,j,t} = u_{i,j,t}N_{i,j,t}$$
+
+$$E_{i,j,t} = m\left((1-u_{i,j,t})N_{i,j,t}\right)$$
+
+$$M_{i,j,t} = \left(\frac{m}{4}(1-u_{i,j,t})\right)(N_{i-1,j,t}+N_{i+1,j,t}+N_{i,j-1,t}+N_{i,j+1,t})$$
+
+$$C_t = \sum_{i=1}^{n} \sum_{j=1}^{n} u_{i,j,t}N_{i,j,t} \sum_{i=1}^{n} \sum_{j=1}^{n} U_{i,j,t}$$
+
+$$R_t = C_tp-c$$
+
+
+## __Parameters__
+
+- $r$ = 
+- $K$ = 
+- $m$ = 
+- $u$ = 
+- $p$ = US$ 60
+- $c$ = US$ 1825
+- $d$ = 0.05
+
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
