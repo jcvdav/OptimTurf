@@ -119,20 +119,22 @@ contour.default(u, size, Rev, add = T)
 
 #Optimum closure times
 
-Rev2 <- matrix(nrow = 51, ncol = 1)
-Time <- seq(0,50)
+Rev2 <- matrix(nrow = 50, ncol = 1)
+Time <- seq(1,50)
 
-area <- matrix(nrow = 10, ncol = 10, 0.6)
+area <- matrix(nrow = 10, ncol = 10, 0.8)
 area[4:6, 4:6] <- 0
 area[6,7] <- 0
 
-for (j in 0:50){
+for (j in 1:50){
   
-  Rev2[j+1] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
+  Rev2[j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
 
 }
 
-plot(Time, Rev2)
+Profit <- Rev2
+
+plot(Time, Profit)
 
 
 manipulate(
@@ -142,8 +144,8 @@ manipulate(
   fish = slider(0,50, initial = 10),
   nsteps = slider(1,50, initial = 50))
 
-mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.5, fish = 1), type = "io")
+mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "io")
 
-mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.5, fish = 1), type = "c")
+mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "c")
 
 
