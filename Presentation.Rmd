@@ -140,5 +140,8 @@ $$N_{t+1}=N_t+rN_t\left(1-\frac{N_t}{K}\right)$$
 
 ## Questions and Comments?
 
+<center><img src="./fishers.jpg" height="400"  /></center>
+
+
 
 
