@@ -1,4 +1,6 @@
 
+library(MPAtools)
+
 mpa_sim3 <- function (area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL, closure.vec = NULL) {
     check = mpa_check(area, nsteps, r, pop0, K, mrate)
   if (check$result == 0) {
