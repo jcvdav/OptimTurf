@@ -10,6 +10,8 @@ runtime: shiny
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+\DeclareMathSizes{10}{10}{7}{7}
+
 ## __Project Set Up__
 
 - A 100 km^2^ TURF (Territorial Use Rights for Fishing), in a 10 by 10 km polygon. 
@@ -34,8 +36,57 @@ knitr::opts_chunk$set(echo = FALSE)
 - Each parcel of the concessioned area has a starting density of $$N_0 = \frac{K}{2}$$
 - Movement wrapped at the edges of the TURF (Ovando *et al.*, 2016).
 - Organisms are recruited once a year, with no age or size structure.
-- Fishing effort (__*u*__) outside the reserve is equal for every parcel.
+- Fishing effort outside the reserve is equal for every parcel.
 - Price and costs are constant through time.
+
+
+## __Equations__
+
+$$N_{i,j,t+1} = N_{i,j,t} + N_{i,j,t}r\left(1-\left(\frac{N_{i,j,t}}{K}\right)\right) - U_{i,j,t} + M_{i,j,t} - E_{i,j,t}$$
+
+Where:
+
+$N_{i,j,t}$ = Number of extractable lobsters in parcel *i, j* at time *t*
+
+$r$ =  Population growth rate
+
+$K$ = Parcel carrying capacity
+
+$U_{i,j,t}$ = Number of lobsters extracted from parcel *i, j* at time *t*
+
+$M_{i,j,t}$ = Number of lobsters migrating into parcel *i, j* at time *t*
+
+$E_{i,j,t}$ = Number of lobsters migrating out of parcel *i, j* at time *t*
+
+***
+
+$$U_{i,j,t} = uN_{i,j,t}$$
+
+$$E_{i,j,t} = m\left((1-u_{i,j,t})N_{i,j,t}\right)$$
+
+$$M_{i,j,t} = \left(\frac{m}{4}(1-u_{i,j,t})\right)(N_{i-1,j,t} + N_{i+1,j,t} + N_{i,j-1,t} + N_{i,j+1,t})$$
+
+Where:
+
+$u$ is the percentage of lobsters captured each year
+
+$m$ is the percentage of the lobsters that move out of a parcel each year
+
+***
+
+$$C_t = \sum_{i=1}^{n} \sum_{j=1}^{n} u_{i,j,t}N_{i,j,t} =  \sum_{i=1}^{n} \sum_{j=1}^{n} U_{i,j,t}$$
+
+$$R_t = C_tp-c$$
+
+Where:
+
+$C_t$ represents catches at time *t*
+
+$R_t$ represents profits at time *t*
+
+$p$ is equal to the price of a lobster
+
+$c$ is the cost of fishing in a year
 
 
 ## __Data__
@@ -44,7 +95,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Data colected through transects inside the reserves.
 - Parameters __*r*__ and __*K*__ were estimated optimizing model fit with solver.
 $$N_{t+1}=N_t+rN_t\left(1-\frac{N_t}{K}\right)$$
-- Parameters __*m*__ and __*u*__ were randomly selected.
+- Parameters __*m*__ and __*u*__ were selected based on our best judgement.
 
 
 ## __Parameters__
@@ -58,25 +109,10 @@ $$N_{t+1}=N_t+rN_t\left(1-\frac{N_t}{K}\right)$$
 - Discount rate ($d$) = 0.05
 
 
-## __Equations__
-
-$N_{i,j,t+1} = N_{i,j,t} + N_{i,j,t}r\left(1-\left(\frac{N_{i,j,t}}{K}\right)\right) - U_{i,j,t} + M_{i,j,t} - E_{i,j,t}$
-
-$U_{i,j,t} = u_{i,j,t}N_{i,j,t}$
-
-$E_{i,j,t} = m\left((1-u_{i,j,t})N_{i,j,t}\right)$
-
-$M_{i,j,t} = \left(\frac{m}{4}(1-u_{i,j,t})\right)(N_{i-1,j,t} + N_{i+1,j,t} + N_{i,j-1,t} + N_{i,j+1,t})$
-
-$C_t = \sum_{i=1}^{n} \sum_{j=1}^{n} u_{i,j,t}N_{i,j,t} \sum_{i=1}^{n} \sum_{j=1}^{n} U_{i,j,t}$
-
-$R_t = C_tp-c$
-
-
 ## Slide with R Output
 
 ```{r cars, echo = TRUE}
-summary(cars)
+
 ```
 
 ## Slide with Plot
