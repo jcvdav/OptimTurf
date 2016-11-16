@@ -117,7 +117,7 @@ contour.default(u, size, Rev, add = T)
 Rev2 <- matrix(nrow = 100, ncol = 1)
 
 area <- matrix(nrow = 10, ncol = 10, 0.5)
-area[4:6, 4:7] <- 0
+area[2:3, 3:7] <- 0
 
 for (j in 1:100){
   
