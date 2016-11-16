@@ -79,7 +79,7 @@ rev2 <- function(area, nsteps, pop0, r, K, mrate, fish){
   t <- sim1$time.series$time
   c <- sim1$time.series$catches
   
-  rev = sum(((c*60)-1825)/((1+0.05)^t))
+  rev = sum(((c*20)-730)/((1+0.05)^t))
   
   return(rev)
 }
