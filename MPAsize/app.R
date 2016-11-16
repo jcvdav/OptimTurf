@@ -13,16 +13,25 @@ library(shiny)
 ui <- shinyUI(fluidPage(
    
    # Application title
-   titlePanel("Old Faithful Geyser Data"),
+   titlePanel("Optimum MPA size and effort"),
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
       sidebarPanel(
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 30)
+         sliderInput("u",
+                     "Proportion of organisms:",
+                     min = 0,
+                     max = 1,
+                     value = 0.5),
+         sliderInput("nsteps",
+                     "Number of iterations",
+                     min = 0, max = 100,
+                     value = 50),
+         sliderInput("r",
+                     "Intrinsic populatin growth rate",
+                     min = 0,
+                     max = 2, 
+                     value = 1.0834)
       ),
       
       # Show a plot of the generated distribution
@@ -34,6 +43,19 @@ ui <- shinyUI(fluidPage(
 
 # Define server logic required to draw a histogram
 server <- shinyServer(function(input, output) {
+  
+  #build area here
+  
+  rev <- function(area, nsteps, pop0, r, K, mrate, closure.vec = NULL){
+    sim1 <- mpa_sim(area = area, nsteps = nsteps, pop0 = K/2, r = r, K = K, mrate = mrate, closure.vec = closure.vec, op = F)
+    t <- sim1$time.series$time
+    c <- sim1$time.series$catches
+    
+    rev = sum(((c*20)-730)/((1+0.05)^t))
+    
+    return(rev)
+  }
+  
    
    output$distPlot <- renderPlot({
       # generate bins based on input$bins from ui.R
