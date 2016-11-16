@@ -122,7 +122,7 @@ contour.default(u, size, Rev, add = T)
 Rev2 <- matrix(nrow = 50, ncol = 1)
 Time <- seq(1,50)
 
-area <- matrix(nrow = 10, ncol = 10, 0.8)
+area <- matrix(nrow = 10, ncol = 10, 0.6)
 area[4:6, 4:6] <- 0
 area[6,7] <- 0
 
@@ -134,7 +134,27 @@ for (j in 1:50){
 
 Profit <- Rev2
 
-plot(Time, Profit)
+plot(Time, Profit, ylim = c(440000000, 560000000))
+lines(Time, Profit)
+
+###
+Rev3 <- matrix(nrow = 50, ncol = 1)
+Time <- seq(1,50)
+
+area <- matrix(nrow = 10, ncol = 10, 0.8)
+area[4:6, 4:6] <- 0
+area[6,7] <- 0
+
+for (j in 1:50){
+  
+  Rev3[j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
+  
+}
+
+Profit2 <- Rev3
+
+points(Time, Profit2)
+lines(Time, Profit2)
 
 
 manipulate(
