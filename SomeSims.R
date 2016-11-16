@@ -105,12 +105,15 @@ for (i in 1:length(u)){
     area <- matrix(nrow = 10, ncol = 10, u[i])
     area[1:j] <- 0
     
-    Rev[i,j] <- rev(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.5)
+    Rev[i,j] <- rev(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1)
     
   }
 }
 
-filled.contour(u, size, Rev)
+Catch_Rate <- u
+Percentage_of_Closure<- size
+
+image(Catch_Rate, Percentage_of_Closure, Rev)
 contour.default(u, size, Rev, add = T)
 
 
@@ -120,11 +123,12 @@ Rev2 <- matrix(nrow = 51, ncol = 1)
 Time <- seq(0,50)
 
 area <- matrix(nrow = 10, ncol = 10, 0.6)
-area[4:6, 3:6] <- 0
+area[4:6, 4:6] <- 0
+area[6,7] <- 0
 
 for (j in 0:50){
   
-  Rev2[j+1] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.8, fish = j)
+  Rev2[j+1] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
 
 }
 
