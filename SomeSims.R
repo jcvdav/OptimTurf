@@ -27,7 +27,9 @@ mpa_sim2 <- function (area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL, fi
   up.cells = c(nrows, 1:(nrows - 1))
   down.cells = c(2:nrows, 1)
   
+  if (fish > 0){
   fish = seq(fish, nsteps, by = fish)
+  }
   
   inside = u.vec == 0
   outside = u.vec > 0
@@ -49,7 +51,7 @@ mpa_sim2 <- function (area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL, fi
       0.25 * leaving[up.cells] + 0.25 * leaving[down.cells]
     surplus = (r * pop) * (1 - (pop/K))
     catches = u.vec * pop
-    if (i == fish) {
+    if (any(fish == i)) {
       u.vec2 = matrix(nrow = 10, ncol = 10, u.vec[1])
       catches = u.vec2 * pop
     }
@@ -108,22 +110,35 @@ for (i in 1:length(u)){
   }
 }
 
-image(u, size, Rev)
+filled.contour(u, size, Rev)
 contour.default(u, size, Rev, add = T)
 
 
 #Optimum closure times
 
-Rev2 <- matrix(nrow = 100, ncol = 1)
+Rev2 <- matrix(nrow = 51, ncol = 1)
 
-area <- matrix(nrow = 10, ncol = 10, 0.5)
-area[2:3, 3:7] <- 0
+area <- matrix(nrow = 10, ncol = 10, 0.6)
+area[4:6, 3:6] <- 0
 
-for (j in 1:100){
+for (j in 0:50){
   
-  Rev2[j] <- rev2(area = area, nsteps = 100, pop0 = K/2, r = r, K = K, mrate = 0.5, fish = j)
+  Rev2[j+1] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
   
 }
 
 plot(Rev2)
+
+
+manipulate(
+  mpa_plot(mpa_sim2(area = area, nsteps = nsteps, pop0 = K/2, r = r, K = K, mrate = mrate, fish = fish), type = "io"),
+  r=slider(0,2, initial = 1.03, step = 0.01),
+  mrate=slider(0,1, initial = 0.5),
+  fish = slider(0,50, initial = 10),
+  nsteps = slider(1,50, initial = 50))
+
+mpa_plot(mpa_sim2(area = area, nsteps = 100, pop0 = K/2, r = r, K = K, mrate = 0.5, fish = 2), type = "io")
+
+mpa_plot(mpa_sim2(area = area, nsteps = 100, pop0 = K/2, r = r, K = K, mrate = 0.5, fish = 10), type = "c")
+
 
