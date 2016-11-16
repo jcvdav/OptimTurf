@@ -1,9 +1,8 @@
 ---
 title: "Maximizing TURF profit through different closure strategies"
-author: "Caio Faro & Juan Carlos Villase?or"
+author: "Caio Faro & Juan Carlos Villaseñor"
 date: "November 16, 2016"
 output: ioslides_presentation
-runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
@@ -109,15 +108,17 @@ $$N_{t+1}=N_t+rN_t\left(1-\frac{N_t}{K}\right)$$
 - Discount rate ($d$) = 0.05
 
 
-## Slide with R Output
+## Strategy 1 - Permanent Closure
+
+<center><img src="./Strategy1.jpeg" /></center>
 
 ```{r cars, echo = TRUE}
 
 ```
 
-## Slide with Plot
+## Strategy 2 - Temporal Closure
 
 ```{r pressure}
-plot(pressure)
+
 ```
 

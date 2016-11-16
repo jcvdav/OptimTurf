@@ -110,7 +110,10 @@ for (i in 1:length(u)){
   }
 }
 
-image(u, size, Rev)
+Catch_Rate <- u
+Percentage_of_Closure<- size
+
+image(Catch_Rate, Percentage_of_Closure, Rev)
 contour.default(u, size, Rev, add = T)
 
 
