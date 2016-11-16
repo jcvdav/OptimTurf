@@ -94,7 +94,7 @@ $c$ is the cost of fishing in a year
 - Data colected through transects inside the reserves.
 - Parameters __*r*__ and __*K*__ were estimated optimizing model fit with solver.
 $$N_{t+1}=N_t+rN_t\left(1-\frac{N_t}{K}\right)$$
-- Parameters __*m*__ and __*u*__ were selected based on our best judgement.
+- Parameters __*m*__, __*u*__, __*p*__ and __*c*__ were selected based on our knowledge.
 
 
 ## __Parameters__
@@ -112,13 +112,33 @@ $$N_{t+1}=N_t+rN_t\left(1-\frac{N_t}{K}\right)$$
 
 <center><img src="./Strategy1.jpeg" /></center>
 
-```{r cars, echo = TRUE}
-
-```
 
 ## Strategy 2 - Temporal Closure
 
-```{r pressure}
+<center><img src="./Strategy2.jpeg" /></center>
 
-```
+
+## Results
+
+- Profit for Strategy 1 was US$ 575,771,357.
+
+- Profit for Strategy 2 was US$ 558,079,331.
+
+- In Strategy 1, the presence of a no-take area allows a even higher effort within the TURF. For $u$ = 0.8, the profit is US$ 599,599,248.
+
+- In the other hand, if we increase the effort in Strategy 2, the profit would decrease to US$ 486,843,038.
+
+
+## Conclusion
+
+- You can make a good amount of money fishing lobster!
+
+- No-take areas can maximize the profits of a fishery.
+
+- You're better off living from the spillover of a no-take area than doing a rotation strategy and harvesting the entire TURF.
+
+
+## Questions and Comments?
+
+
 
