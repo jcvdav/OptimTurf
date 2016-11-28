@@ -118,7 +118,7 @@ filled.contour(Catch_Rate, Percentage_of_Closure, Rev)
 
 contour.default(u, size, Rev, add = T)
 
-filled.contour(u,size,Rev, col = matlab.like2(13), plot.axes = {contour(u,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)})
+filled.contour(u,size,Rev, col = matlab.like2(13), plot.axes = {contour(u,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Catch rate (u)"), ylab = c("Percentage as reserve"))
 
 
 #Optimum closure times
