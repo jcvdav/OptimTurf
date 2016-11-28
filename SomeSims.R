@@ -2,13 +2,14 @@
 
 library(tidyverse)
 library(MPAtools)
+library(colorRamps)
 
 rev <- function(area, nsteps, pop0, r, K, mrate, closure.vec = NULL){
   sim1 <- mpa_sim(area = area, nsteps = nsteps, pop0 = K/2, r = r, K = K, mrate = mrate, closure.vec = closure.vec, op = F)
   t <- sim1$time.series$time
   c <- sim1$time.series$catches
   
-  rev = sum(((c*20)-730)/((1+0.05)^t))
+  rev = sum(((c*20)-18250)/((1+0.05)^t))
   
   return(rev)
 }
@@ -28,7 +29,7 @@ mpa_sim2 <- function (area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL, fi
   down.cells = c(2:nrows, 1)
   
   if (fish > 0){
-  fish = seq(fish, nsteps, by = fish)
+    fish = seq(fish, nsteps, by = fish)
   }
   
   inside = u.vec == 0
@@ -79,7 +80,7 @@ rev2 <- function(area, nsteps, pop0, r, K, mrate, fish){
   t <- sim1$time.series$time
   c <- sim1$time.series$catches
   
-  rev = sum(((c*20)-730)/((1+0.05)^t))
+  rev = sum(((c*20)-18250)/((1+0.05)^t))
   
   return(rev)
 }
@@ -113,8 +114,11 @@ for (i in 1:length(u)){
 Catch_Rate <- u
 Percentage_of_Closure<- size
 
-image(Catch_Rate, Percentage_of_Closure, Rev)
+filled.contour(Catch_Rate, Percentage_of_Closure, Rev)
+
 contour.default(u, size, Rev, add = T)
+
+filled.contour(u,size,Rev, col = matlab.like2(13), plot.axes = {contour(u,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)})
 
 
 #Optimum closure times
@@ -129,7 +133,7 @@ area[6,7] <- 0
 for (j in 1:50){
   
   Rev2[j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
-
+  
 }
 
 Profit <- Rev2
@@ -157,12 +161,12 @@ points(Time, Profit2)
 lines(Time, Profit2)
 
 
-manipulate(
-  mpa_plot(mpa_sim2(area = area, nsteps = nsteps, pop0 = K/2, r = r, K = K, mrate = mrate, fish = fish), type = "io"),
-  r=slider(0,2, initial = 1.03, step = 0.01),
-  mrate=slider(0,1, initial = 0.5),
-  fish = slider(0,50, initial = 10),
-  nsteps = slider(1,50, initial = 50))
+# manipulate(
+#   mpa_plot(mpa_sim2(area = area, nsteps = nsteps, pop0 = K/2, r = r, K = K, mrate = mrate, fish = fish), type = "io"),
+#   r=slider(0,2, initial = 1.03, step = 0.01),
+#   mrate=slider(0,1, initial = 0.5),
+#   fish = slider(0,50, initial = 10),
+#   nsteps = slider(1,50, initial = 50))
 
 mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "io")
 
