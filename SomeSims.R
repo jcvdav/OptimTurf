@@ -91,7 +91,7 @@ rev2 <- function(area, nsteps, pop0, r, K, mrate, fish){
 K <- 53216.2302
 r <- 1.0834
 
-area <- matrix(nrow =10, ncol = 10, 0.5)
+area <- matrix(nrow =10, ncol = 10, 0.6)
 area[5,5] = 0 
 
 rev(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1)
@@ -124,21 +124,21 @@ filled.contour(u,size,Rev, col = matlab.like2(13), plot.axes = {contour(u,size,R
 #Optimum closure times
 
 Rev2 <- matrix(nrow = 50, ncol = 1)
-Time <- seq(1,50)
+Time <- seq(0,50)
 
 area <- matrix(nrow = 10, ncol = 10, 0.6)
 area[4:6, 4:6] <- 0
 area[6,7] <- 0
 
-for (j in 1:50){
+for (j in 1:51){
   
-  Rev2[j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j)
+  Rev2[j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j-1)
   
 }
 
 Profit <- Rev2
 
-plot(Time, Profit, ylim = c(440000000, 560000000))
+plot(Time, Profit, ylim = c(500000000, 560000000), xlab = "Rotation length (years)", col = "blue")
 lines(Time, Profit)
 
 ###
@@ -168,8 +168,73 @@ lines(Time, Profit2)
 #   fish = slider(0,50, initial = 10),
 #   nsteps = slider(1,50, initial = 50))
 
-mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "io")
+par(mfrow=c(3,1))
 
+mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 0), type = "c")
 mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "c")
+mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 2), type = "c")
 
 
+
+# mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "io")
+# 
+# mpa_plot(mpa_sim2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = 1), type = "c")
+
+
+#### Rotation time vs percentage as reserve
+
+size <- seq(1:100)
+closures <- seq(1:50)
+
+Rev <- matrix(nrow = length(closures), ncol = length(size), 0)
+
+for (i in 1:length(closures)){
+  for (j in 1:length(size)){
+    area <- matrix(nrow = 10, ncol = 10, 0.6)
+    area[1:j] <- 0
+    Rev[i,j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = closures[i])
+    
+  }
+}
+
+image(closures, size, Rev)
+filled.contour(closures,size,Rev, col = matlab.like2(13), plot.axes = {contour(closures,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Rotation time (years)"), ylab = c("Percentage as reserve"))
+
+#### MPAsize vs movement rate
+
+size <- seq(1:100)
+mrate <- seq(0.1,1, by = 0.1)
+
+Rev <- matrix(nrow = length(mrate), ncol = length(size), 0)
+
+for (i in 1:length(mrate)){
+  for (j in 1:length(size)){
+    area <- matrix(nrow = 10, ncol = 10, 0.6)
+    area[1:j] <- 0
+    Rev[i,j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = mrate[i], fish = 0)
+    
+  }
+}
+
+filled.contour(mrate,size,Rev, col = matlab.like2(13), plot.axes = {contour(mrate,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Movement rate (m)"), ylab = c("Percentage as reserve"))
+
+
+#### Rotation time vs movement rate
+
+closures <- seq(1:50)
+mrate <- seq(0.1,1, by = 0.1)
+
+Rev <- matrix(nrow = length(mrate), ncol = length(closures), 0)
+
+area <- matrix(nrow = 10, ncol = 10, 0.6)
+area[4:6, 4:6] <- 0
+area[6,7] <- 0
+
+for (i in 1:length(mrate)){
+  for (j in 1:length(closures)){
+    Rev[i,j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = mrate[i], fish = closures[j])
+    
+  }
+}
+
+filled.contour(mrate,closures,Rev, col = matlab.like2(30), plot.axes = {contour(mrate,closures,Rev, nlevels = 30, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Movement rate (m)"), ylab = c("Rotation length (years)"))
