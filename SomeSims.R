@@ -48,7 +48,7 @@ mpa_sim2 <- function (area, nsteps, r, pop0, K, mrate, op = FALSE, cf = NULL, fi
   }
   for (i in 1:nsteps) {
     leaving = pop * mrate
-    arriving = 0.25 * leaving[left.cells] + 0.25 * leaving[right.cells] + 0.25 * leaving[up.cells] + 0.25 * leaving[down.cells]
+    arriving = 0.25 * leaving[,left.cells] + 0.25 * leaving[,right.cells] + 0.25 * leaving[up.cells,] + 0.25 * leaving[down.cells,]
     surplus = (r * pop) * (1 - (pop/K))
     catches = u.vec * pop
     if (any(fish == i)) {
@@ -143,18 +143,18 @@ abline(a = 575433994, b = 0, col = "red")
 # ###
 # Rev3 <- matrix(nrow = 51, ncol = 1)
 # Time <- seq(0,50)
-#
+# 
 # area <- matrix(nrow = 10, ncol = 10, 0.6)
 # area[1:10] <- 0
-#
+# 
 # for (j in 1:51){
-#
+#   
 #   Rev3[j] <- rev2(area = area, nsteps = 50, pop0 = K/2, r = r, K = K, mrate = 0.1, fish = j-1)
-#
+#   
 # }
-#
+# 
 # Profit2 <- Rev3
-#
+# 
 # points(Time, Profit2)
 # lines(Time, Profit2)
 
