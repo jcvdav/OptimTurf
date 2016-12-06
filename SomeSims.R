@@ -113,11 +113,7 @@ for (i in 1:length(u)){
 Catch_Rate <- u
 Percentage_of_Closure<- size
 
-filled.contour(Catch_Rate, Percentage_of_Closure, Rev)
-
-contour.default(u, size, Rev, add = T)
-
-filled.contour(u,size,Rev, col = matlab.like2(13), plot.axes = {contour(u,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Catch rate (u)"), ylab = c("Percentage as reserve"))
+filled.contour(u,size,Rev, col = matlab.like2(30), plot.axes = {contour(u,size,Rev, nlevels = 15, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Catch rate (u)"), ylab = c("Percentage as reserve"))
 
 
 #Optimum closure times
@@ -138,7 +134,6 @@ Profit <- Rev2
 
 plot(Time, Profit, xlab = "Rotation length (years)", col = "blue")
 lines(Time, Profit)
-abline(a = 575433994, b = 0, col = "red")
 
 # ###
 # Rev3 <- matrix(nrow = 51, ncol = 1)
@@ -205,8 +200,7 @@ for (i in 1:length(closures)){
   }
 }
 
-image(closures, size, Rev)
-filled.contour(closures,size,Rev, col = matlab.like2(13), plot.axes = {contour(closures,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Rotation time (years)"), ylab = c("Percentage as reserve"))
+filled.contour(closures,size,Rev, col = matlab.like2(30), plot.axes = {contour(closures,size,Rev, nlevels = 10, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Rotation time (years)"), ylab = c("Percentage as reserve"))
 
 #### MPAsize vs movement rate
 
@@ -244,7 +238,7 @@ for (i in 1:length(mrate)){
   }
 }
 
-filled.contour(mrate,closures,Rev, col = matlab.like2(25), plot.axes = {contour(mrate,closures,Rev, nlevels = 16, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Movement rate (m)"), ylab = c("Rotation length (years)"))
+filled.contour(mrate,closures,Rev, col = matlab.like2(25), plot.axes = {contour(mrate,closures,Rev, nlevels = 20, drawlabels = TRUE, axes = FALSE, frame.plot = FALSE, add = TRUE); axis(1); axis(2)}, xlab = c("Movement rate (m)"), ylab = c("Rotation length (years)"))
 
 area <- matrix(nrow = 10, ncol = 10, 0.6)
 for (i in 1:100){
