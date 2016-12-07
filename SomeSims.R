@@ -121,7 +121,7 @@ filled.contour(u,size,Rev, col = matlab.like2(30), plot.axes = {contour(u,size,R
 Rev2 <- matrix(nrow = 51, ncol = 1)
 Time <- seq(0,50)
 
-area <- matrix(nrow = 10, ncol = 10, 0.1)
+area <- matrix(nrow = 10, ncol = 10, 0.6)
 area[1:10] <- 0
 
 for (j in 1:51){
